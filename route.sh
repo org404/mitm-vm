@@ -11,7 +11,7 @@ echo "nameserver 8.8.8.8" > /etc/resolv.conf
 export DEBIAN_FRONTEND=noninteractive
 
 #Route 8888 to 8080. This is used for the Trudy intercept. Remove if you do not want to use trudy.
-#/sbin/iptables -t nat -A PREROUTING -i eth1 -p tcp --dport 8888 -m tcp -j REDIRECT --to-ports 8080
+/sbin/iptables -t nat -A PREROUTING -i eth1 -p tcp --dport 8888 -m tcp -j REDIRECT --to-ports 8080
 
 #Route all $dport destined traffic through the VM's port 6443. Use this to intercept TLS traffic. Remove if you do not want to use trudy.
 #NOTE: If the device you are proxying validates TLS certificates and you do not have a valid TLS certificate

@@ -1,4 +1,9 @@
 Vagrant.configure("2") do |config|
+  config.vm.network :public_network,
+      :dev => "virbr0",
+      :mode => "bridge",
+      :type => "bridge"
+
   config.vm.box = "debian/jessie64"
   config.vm.provider "virtualbox" do |v|
     v.memory = 2048
@@ -6,7 +11,7 @@ Vagrant.configure("2") do |config|
   end
   #Workaround to fix an OS X specific issue
   config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'" 
-  config.vm.network "public_network"
+  
   #Provision all utilities
   config.vm.provision :shell, path: "bootstrap.sh"
   config.vm.provision :shell, path: "route.sh", run: "always"
